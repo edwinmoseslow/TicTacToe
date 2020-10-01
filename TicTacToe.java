@@ -3,25 +3,15 @@ import java.util.*;
 import java.lang.*;
 
 public class TicTacToe{
-
-    /* 
-    ------------------------------------------------------------------
-    Requirements
-    ------------------------------------------------------------------
-    1.  Ask for names of players 1 and 2.
-    2.  Alternate between input for player 1 and player 2.
-    3.  Stop when one of the players has won.
-    ------------------------------------------------------------------
-    */
     
-    // 
-    private static String horLines          = "";
+    // Commandline interface  
+    private static String horLines          = ""; // required be reset
     private static final int SPACE_BETWEEN  = 2;
     private static final String VER_LINES   = "|";
     private static final String DIVIDER     = "----------------------------------------------------";
 
     // Game State
-    private static int gameState              = 0;
+    private static int gameState              = 0; // required be reset
     private static final int GAME_DEFAULT     = 0;
     private static final int GAME_ETR_NAME    = 1;
     private static final int GAME_ETR_N_BOARD = 2;
@@ -30,36 +20,40 @@ public class TicTacToe{
     private static final int GAME_END         = 5;
 
     // Player Turn
-    private static int turn                 = 0;
-    private static final int PLAYER_ONE     = 1;
-    private static final int PLAYER_TWO     = 2;
+    private static int turn                     = 0; // required be reset
+    private static final int PLAYER_DEFAULT     = 0;
+    private static final int PLAYER_ONE         = 1;
+    private static final int PLAYER_TWO         = 2;
 
     // Player Name
-    private static String plyOneName        = "";
-    private static String plyTwoName        = "";
+    private static String plyOneName            = ""; // required be reset
+    private static String plyTwoName            = ""; // required be reset
 
 
-    private static int gameMode             = 0;
-    private static final int BASIC_MODE     = 1;
-    private static final int INTERME_MODE   = 2;
+    private static int gameMode                 = 0; // required to reset
+    private static final int DEFAULT_MODE       = 0;
+    private static final int BASIC_MODE         = 1;
+    private static final int INTERME_MODE       = 2;
 
     // Game Exit Check
-    private static boolean exit             = false;
+    private static boolean exit                 = false;
 
     // Number of Rounds Check
-    private static int round                = 1;
+    private static int round                    = 1; // required be reset
+    private static final int STARTING_ROUND     = 1;
+
+    // Board dimension
+    private static int dimension                = 0; // required be reset
 
     // Scanner
     private static Scanner scanner;
 
     // Game Board
-    private static Map<Integer, String> board;
-
-    private static int dimension            = 0;
+    private static Map<Integer, String> board; // required be reset
 
     // Markers
-    private static ArrayList<Integer> plyOneMarkers;
-    private static ArrayList<Integer> plyTwoMarkers;
+    private static ArrayList<Integer> plyOneMarkers; // required be reset
+    private static ArrayList<Integer> plyTwoMarkers; // required be reset
 
     public static void main(String []args) {
         // init a new instance
@@ -80,7 +74,7 @@ public class TicTacToe{
         switch (gameState) {
             case GAME_DEFAULT:
                 printIntro();
-                turn = 1;
+                turn = PLAYER_ONE;
                 printAskName();
                 break;
             case GAME_ETR_NAME:
@@ -235,7 +229,7 @@ public class TicTacToe{
                     System.out.println(DIVIDER);
                     System.out.println("Invalid input! \n- Please input either '1' to '2' or \n'n' to exit game.");
                     System.out.println(DIVIDER);
-                    gameMode = 0;
+                    gameMode = DEFAULT_MODE;
                     return;
             }
         } catch(NumberFormatException e) {
@@ -275,7 +269,7 @@ public class TicTacToe{
         System.out.println("Game Start");
         System.out.println(DIVIDER);
 
-        if(turn == 0){
+        if(turn == PLAYER_DEFAULT){
             Random r = new Random();
             turn = ((r.nextInt(10)%2 == 0) ? PLAYER_TWO : PLAYER_ONE);  
             System.out.println("Player " + turn + " will start first!");  
@@ -299,8 +293,8 @@ public class TicTacToe{
     private static void resetGame(){
         // reset everything 
         clearData();
-        gameMode = 0;
-        round = 1;
+        gameMode = DEFAULT_MODE;
+        round = STARTING_ROUND;
         gameState = GAME_DEFAULT;
     }
 
@@ -423,7 +417,7 @@ public class TicTacToe{
 
     private static boolean checkDiagonally(int position, ArrayList<Integer> markers){
         // check for other possible markers beside the current one
-        if((position % dimension) > 1 && position > dimension && (position + dimension) < (dimension * dimension) {
+        if((position % dimension) > 1 && position > dimension && (position + dimension) < (dimension * dimension)) {
             int top = position - dimension;
             int bottom = position + dimension;
             int left = position - 1;
@@ -447,7 +441,7 @@ public class TicTacToe{
             case 1:
                 plyOneName = input;
                 gameState = GAME_ETR_NAME;
-                turn = 2;
+                turn = PLAYER_TWO;
                 break;
             case 2:
                 if(plyOneName.equals(input)){
@@ -457,7 +451,7 @@ public class TicTacToe{
                     return;
                 }
                 
-                turn = 0;
+                turn = PLAYER_DEFAULT;
                 plyTwoName = input;
                 gameState = GAME_MENU;
                 break;

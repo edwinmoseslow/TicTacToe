@@ -55,7 +55,6 @@ The logic behind on how we can utilize the central position of the board :
 
     Find all markers around [5] :
     
-
     ----------------------------------
     Horizontal : [4, 5, 6]
     ----------------------------------

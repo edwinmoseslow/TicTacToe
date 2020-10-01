@@ -1,11 +1,36 @@
-## Tic Tac Toe - CLI(Java)
+# Tic Tac Toe - CLI(Java)
 
 This is a simple game of tic tac toe.
 
-To run the game type : 
-> make run
+### Game Mode :
 
-### Documentation :
+    Basic Mode : 3x3
+    Intermediate : NxN
+
+### Game Rules :
+
+    Just like any other Tic Tac Toe game, players are required to get a 3 matching combination horizontally, diagonally or vertically in order to win the game.
+
+### Game Manual :
+
+    As a user all you need to do is to read the instructions given to you via the terminal and follow through by entering the specific options.
+
+---
+<br>
+
+## How to run the game :
+To run the game type : 
+
+    make run
+
+or
+
+    java TicTacToe.java
+
+---
+<br>
+
+## Documentation :
 Finding a possible match with NxN with certain assumptions in place,
 
     Assuming N = 3,
@@ -93,3 +118,11 @@ The logic behind on how we can utilize the central position of the board :
 Cons about this soultion :
 
     Though this solution may seems like it does a good job but the complexity increases according to N. When N increases the board increases which also tells us that there will be more centralized positions that will occur on the board. With that this solution would have to iterate through all of the centralized position as it goes.
+
+    To reduce load, instead of iterating through all the position. I created an ArrayList to track only those positions that the user have entered/marked and with that all I needed to iterate through are the marked positions and its surrounding.
+
+Things I noticed :
+
+    There is only this much of space your screen can show you through your terminal hence if you try putting N > 500, I believe that the program will probably still run but the output will definitely be messed up unless you do have a screen size resolution that is able to hold this much of data in your terminal.
+
+    I also believed that this solution is not the best and I am certain there are better solution to optimize or beat this solution in terms of processes.   

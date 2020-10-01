@@ -4,7 +4,7 @@ import java.lang.*;
 
 public class TicTacToe{
     
-    // Commandline interface  
+    // Commandline Interface  
     private static String horLines          = ""; // required be reset
     private static final int SPACE_BETWEEN  = 2;
     private static final String VER_LINES   = "|";
@@ -29,7 +29,7 @@ public class TicTacToe{
     private static String plyOneName            = ""; // required be reset
     private static String plyTwoName            = ""; // required be reset
 
-
+    // Game Mode
     private static int gameMode                 = 0; // required to reset
     private static final int DEFAULT_MODE       = 0;
     private static final int BASIC_MODE         = 1;
@@ -42,7 +42,7 @@ public class TicTacToe{
     private static int round                    = 1; // required be reset
     private static final int STARTING_ROUND     = 1;
 
-    // Board dimension
+    // Board Dimension
     private static int dimension                = 0; // required be reset
 
     // Scanner
@@ -80,14 +80,8 @@ public class TicTacToe{
             case GAME_ETR_NAME:
                 printAskName();
                 break;
-            // case GAME_ETR_N_BOARD:
-            //     break;
             case GAME_MENU:
-                System.out.println(DIVIDER);
-                System.out.println("Enter '1' for Basic Mode(Board Size : 3x3)");
-                System.out.println("Enter '2' for Intermediate Mode(Board Size : NxN)");
-                System.out.println("Enter 'n' to Exit");
-                System.out.println(DIVIDER);
+                printMenuOption();
                 break;
             case GAME_START:
                 printBoard();
@@ -162,6 +156,14 @@ public class TicTacToe{
         }
 
         System.out.print(" " + padding + value + " ");
+    }
+
+    private static void printMenuOption() {
+        System.out.println(DIVIDER);
+        System.out.println("Enter '1' for Basic Mode(Board Size : 3x3)");
+        System.out.println("Enter '2' for Intermediate Mode(Board Size : NxN)");
+        System.out.println("Enter 'n' to Exit");
+        System.out.println(DIVIDER);
     }
     
     private static void printIntro() {
@@ -380,12 +382,12 @@ public class TicTacToe{
     }
 
     private static boolean checkBoard(ArrayList<Integer> markers){
-        System.out.println("round : " + round);
         if(round <= 4) {
             // none of the players have 3 markers on board
             return false;
         }
 
+        // iterate through known markers
         for(int i : markers){
             if(checkHorizontal(i, markers) || checkDiagonally(i, markers) || checkVertical(i, markers)){
                 return true;

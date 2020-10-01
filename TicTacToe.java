@@ -5,19 +5,23 @@ import java.lang.*;
 public class TicTacToe{
     
     // Commandline Interface  
-    private static String horLines          = ""; // required be reset
-    private static final int SPACE_BETWEEN  = 2;
-    private static final String VER_LINES   = "|";
-    private static final String DIVIDER     = "----------------------------------------------------";
+    private static String horLines              = ""; // required be reset
+    private static final int SPACE_BETWEEN      = 2;
+    private static final String VER_LINES       = "|";
+    private static final String DIVIDER         = "----------------------------------------------------";
 
     // Game State
-    private static int gameState              = 0; // required be reset
-    private static final int GAME_DEFAULT     = 0;
-    private static final int GAME_ETR_NAME    = 1;
-    private static final int GAME_ETR_N_BOARD = 2;
-    private static final int GAME_MENU        = 3;
-    private static final int GAME_START       = 4;
-    private static final int GAME_END         = 5;
+    private static int gameState                = 0; // required be reset
+    private static final int GAME_DEFAULT       = 0;
+    private static final int GAME_ETR_NAME      = 1;
+    private static final int GAME_ETR_N_BOARD   = 2;
+    private static final int GAME_MENU          = 3;
+    private static final int GAME_START         = 4;
+    private static final int GAME_END           = 5;
+
+    private static final int ERROR_OPTION       = 1;
+    private static final int ERROR_SELECTION    = 2;
+    private static final int ERROR_BOARD_SIZE   = 3;
 
     // Player Turn
     private static int turn                     = 0; // required be reset
@@ -65,12 +69,12 @@ public class TicTacToe{
         gameState = GAME_DEFAULT;
 
         while(!exit) {
-            printOptions();
+            printInterface();
             userInput(scanner.nextLine());
         }
     }
 
-    private static void printOptions() {
+    private static void printInterface() {
         switch (gameState) {
             case GAME_DEFAULT:
                 printIntro();
@@ -89,7 +93,6 @@ public class TicTacToe{
         } 
     }
 
-    // only need to set once
     private static void setupHorLines() {
         horLines = "";
         int space = getLongestString() + SPACE_BETWEEN;
@@ -126,24 +129,21 @@ public class TicTacToe{
             count++;
         }
 
-        // breakline
-        System.out.println("\n");
-
-        System.out.println("To exit game, enter 'n' and follow up by Enter.");
+        System.out.println("\n\nTo exit game, enter 'n' and follow up by Enter.\n");
         
         if(gameState == GAME_END) {
             System.out.println("To play another round, enter 'r' and follow up by Enter.");
-        }
-        else {
+        } else {
             switch (turn){
-                case 1:
-                    System.out.println(plyOneName + ", choose the number shown above to place an 'X' into:");
+                case PLAYER_ONE:
+                    System.out.println("Player " + PLAYER_ONE + " : " + plyOneName + " turn to choose!");
+                    System.out.println("Choose the number shown above to place an 'X' into:");
                     break;
-                case 2:
-                    System.out.println(plyTwoName + ", choose the number shown above to place an 'O' into:");
+                case PLAYER_TWO:
+                    System.out.println("Player " + PLAYER_TWO + " : " + plyTwoName + " turn to choose!");
+                    System.out.println("Choose the number shown above to place an 'O' into:");
                     break;
             }
-            
         }
     }
 
@@ -175,10 +175,10 @@ public class TicTacToe{
 
     private static void printAskName(){
         switch(turn){
-            case 1:
+            case PLAYER_ONE:
                 System.out.println("Enter name for Player 1 :");
             break;
-            case 2:
+            case PLAYER_TWO:
                 System.out.println("Enter name for Player 2 :");
             break;
         }
@@ -206,7 +206,7 @@ public class TicTacToe{
                 setPlayerName(input);
                 break;
             case GAME_ETR_N_BOARD:
-                setBoard(input);
+                setDimension(input);
                 break;
             case GAME_START:
                 updateBoard(input);
@@ -220,7 +220,7 @@ public class TicTacToe{
             switch (gameMode){
                 case BASIC_MODE:
                     // Basic Mode
-                    setBoard("3");
+                    setDimension("3");
                     break;
                 case INTERME_MODE:
                     // Intermediate Mode
@@ -228,36 +228,49 @@ public class TicTacToe{
                     gameState = GAME_ETR_N_BOARD;
                     return;
                 default:
-                    System.out.println(DIVIDER);
-                    System.out.println("Invalid input! \n- Please input either '1' to '2' or \n'n' to exit game.");
-                    System.out.println(DIVIDER);
+                    printErrorMsg(ERROR_OPTION);
                     gameMode = DEFAULT_MODE;
                     return;
             }
         } catch(NumberFormatException e) {
-            System.out.println(DIVIDER);
-            System.out.println("Invalid input! \n- Please input either '1' to '2' or \n'n' to exit game.");
-            System.out.println(DIVIDER);
+            printErrorMsg(ERROR_OPTION);
             return;
         }
     }
 
-    private static void setBoard(String input){
+    private static void printErrorMsg(int errorCode){
+        switch(errorCode){
+            case ERROR_OPTION:
+                System.out.println(DIVIDER);
+                System.out.println("Invalid input! \n- Please input either '1' to '2' or \n'n' to exit game.");
+                System.out.println(DIVIDER);
+                break;
+            case ERROR_SELECTION:
+                System.out.println(DIVIDER);
+                System.out.println("Invalid input! \n- Please input either '1' to '" + board.size() + "' or 'n' to exit game.");
+                System.out.println(DIVIDER);
+                break;
+            case ERROR_BOARD_SIZE:
+                System.out.println(DIVIDER);
+                System.out.println("Invalid input! \n- Please input any number of your choice that is higher than '2' or \n'n' to exit game.");
+                System.out.println(DIVIDER);
+                break;
+            
+        }
+    }
+
+    private static void setDimension(String input){
         try {
             dimension = Integer.valueOf(input);
             if(dimension <= 2){
-                System.out.println(DIVIDER);
-                System.out.println("Input number smaller than 3! \n- Please input any number of your choice or \n'n' to exit game.");
-                System.out.println(DIVIDER);
+                printErrorMsg(ERROR_BOARD_SIZE);
                 return;
             } else {
-                drawBoard(dimension);
+                setupBoard(dimension);
                 gameState = GAME_START;
             }
         } catch(NumberFormatException e) {
-            System.out.println(DIVIDER);
-            System.out.println("Invalid input! \n- Please input any number of your choice that is higher than '2' or \n'n' to exit game.");
-            System.out.println(DIVIDER);
+            printErrorMsg(ERROR_BOARD_SIZE);
             return;
         }
 
@@ -271,10 +284,14 @@ public class TicTacToe{
         System.out.println("Game Start");
         System.out.println(DIVIDER);
 
+        determineWhoToStart();
+    }
+
+    private static void determineWhoToStart(){
         if(turn == PLAYER_DEFAULT){
             Random r = new Random();
             turn = ((r.nextInt(10)%2 == 0) ? PLAYER_TWO : PLAYER_ONE);  
-            System.out.println("Player " + turn + " will start first!");  
+            // System.out.println("Player " + turn + " will start first!");  
         }
     }
 
@@ -283,13 +300,20 @@ public class TicTacToe{
         System.out.println("Game Over");
         System.out.println(DIVIDER);
 
-        if(winnerExist){
-            System.out.println("Player " + turn + " : Won!");
-        } else {
-            System.out.println("It's a Draw!");
-        }
-
         printBoard();
+
+        if(winnerExist){
+            switch (turn){
+                case PLAYER_ONE:
+                    System.out.println("\nCongratulations Player " + PLAYER_ONE + " : " + plyOneName + "! You have won.");
+                    break;
+                case PLAYER_TWO:
+                    System.out.println("\nCongratulations Player " + PLAYER_TWO + " : " + plyTwoName + "! You have won.");
+                    break;
+            }
+        } else {
+            System.out.println("\nIt's a Draw!");
+        }
     }
 
     private static void resetGame(){
@@ -307,11 +331,7 @@ public class TicTacToe{
             int i = Integer.valueOf(input);
 
             if(i > board.size() || i <= 0){
-                System.out.println(DIVIDER);
-                System.out.println("Invalid input! \n- Please input either '1' to '" + board.size() + "' or 'n' to exit game.");
-                System.out.println(DIVIDER);
-
-                System.out.println("Player " + turn + " turn!");
+                printErrorMsg(ERROR_SELECTION);
                 return;
             }
 
@@ -328,11 +348,7 @@ public class TicTacToe{
                     break;
             }
         } catch(NumberFormatException e) {
-            System.out.println(DIVIDER);
-            System.out.println("Invalid input! \n- Please input either '1' to '" + board.size() + "' or 'n' to exit game.");
-            System.out.println(DIVIDER);
-
-            System.out.println("Player " + turn + " turn!");
+            printErrorMsg(ERROR_SELECTION);
             return;
         }
 
@@ -346,17 +362,15 @@ public class TicTacToe{
             System.out.println("Game in Progress");
             System.out.println(DIVIDER);
 
-            if(turn != 0){
+            if(turn != PLAYER_DEFAULT){
                 turn = (turn == PLAYER_ONE) ? PLAYER_TWO : PLAYER_ONE;
             }
-
-            System.out.println("Player " + turn + " turn!");
         }
 
         round++;
     }
 
-    private static void drawBoard(int boardSize){
+    private static void setupBoard(int boardSize){
         if(boardSize == 0) {
             return;
         }
@@ -370,8 +384,6 @@ public class TicTacToe{
         for(int i = 1; i < boardSize; i++){
             board.put(i, String.valueOf(i));
         }
-
-        setupHorLines();
     }
 
     private static void clearData(){
@@ -440,12 +452,12 @@ public class TicTacToe{
         }
 
         switch (turn){
-            case 1:
+            case PLAYER_ONE:
                 plyOneName = input;
                 gameState = GAME_ETR_NAME;
                 turn = PLAYER_TWO;
                 break;
-            case 2:
+            case PLAYER_TWO:
                 if(plyOneName.equals(input)){
                     System.out.println(DIVIDER);
                     System.out.println("Same name detected! \n- Please input another name.");

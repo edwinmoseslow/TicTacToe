@@ -43,13 +43,14 @@ Finding a possible match with NxN with certain assumptions in place,
     7 | 8 | 9
 
     Position [1, 2, 3, 4, 6, 7, 8, 9] :
-    Possible combination of 3 : 2 - 3 
+    Are able to form 2 - 3 possible combinations.
     
     Position [5] :
-    Possible combination of 3 : 4
-    Possible combination of 3 increases to 8, if we include the used of finding both the vertical and horizontal combination of the positions for [top, bottom, left, right] of the current position.  
+    Is able to form 4 possible combinations.
+
+    The possible combinations increases to 8, if we include the used of finding both the vertical and horizontal combination of the positions for [top, bottom, left, right] which is the corners of the current position [5].  
     
-    Hence one of the possible solution is to target the most centralized position on the board which is [5] on a 3x3 board.
+    Hence one of the possible solution is to target the most centralized position on the board which is [5] on a 3x3 board to make the best of it.
 
 The logic behind on how we can utilize the central position of the board :
 
@@ -58,13 +59,13 @@ The logic behind on how we can utilize the central position of the board :
     ----------------------------------
     Horizontal : [4, 5, 6]
     ----------------------------------
-    Condition to prevent corner position at the extreme left :
+    Condition to prevent selecting position at the extreme left :
     (position % n) != 1
 
-    Condition to prevent corner position at the extreme right : 
+    Condition to prevent selecting position at the extreme right : 
     (position % n) != 0
 
-    Condition to prevent corner positions at both extreme left & right : 
+    Condition to prevent selecting positions at both extreme left & right : 
     (position % n) > 1
 
     left of 5 : 4 = 5 - 1
@@ -73,13 +74,13 @@ The logic behind on how we can utilize the central position of the board :
     ----------------------------------
     Vertical : [2, 5, 8]
     ----------------------------------
-    Condition to prevent corner position at extreme top : 
+    Condition to prevent selecting position at extreme top : 
     position > n
     
-    Condition to prevent corner position at extreme bottom :
+    Condition to prevent selecting position at extreme bottom :
     (position + n) <= (n * n)
 
-    Condition to prevent corner positions at both extreme top & bottom :
+    Condition to prevent selecting positions at both extreme top & bottom :
     position > n && (position + n) <= (n * n)
     top of 5 is 2 = 5(position) - n
     bottom of 5 is 8 = 5(position) + n
@@ -87,9 +88,9 @@ The logic behind on how we can utilize the central position of the board :
     ----------------------------------
     Diagonally : [1, 5, 9], [3, 5, 7]
     ----------------------------------
-    To check diagonally, you should use this in relation to horizontal & vertical.
+    To check diagonally, I the same concept for horizontal & vertical and extend to the diagonal condition.
 
-    Condition to prevent all corners positions :
+    Condition to prevent selecting positions from all 4 corners :
     (position % n) > 1 && position > n && (position + n) <= (n * n)
 
     top-left of 5 is 1 = (get top position) - 1
@@ -114,7 +115,7 @@ The logic behind on how we can utilize the central position of the board :
     left position   - [4], find vertical combination
     right position  - [6], find vertical combination
 
-Cons about this soultion :
+Cons about this solution :
 
     Though this solution may seems like it does a good job but the complexity increases according to N. When N increases the board increases which also tells us that there will be more centralized positions that will occur on the board. With that this solution would have to iterate through all of the centralized position as it goes.
 

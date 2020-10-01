@@ -413,7 +413,7 @@ public class TicTacToe{
 
     private static boolean checkVertical(int position, ArrayList<Integer> markers){
         // check for other possible markers beside the current one
-        if(position > dimension && (position + dimension) <= board.size()){
+        if(position > dimension && (position + dimension) <= (dimension * dimension)){
             // ignore the first row and last row
             return (markers.contains(position - dimension) && markers.contains(position + dimension));
         }
@@ -423,12 +423,12 @@ public class TicTacToe{
 
     private static boolean checkDiagonally(int position, ArrayList<Integer> markers){
         // check for other possible markers beside the current one
-        if((position % dimension) > 1 && position > dimension && (position + dimension) < board.size()) {
+        if((position % dimension) > 1 && position > dimension && (position + dimension) < (dimension * dimension) {
             int top = position - dimension;
             int bottom = position + dimension;
             int left = position - 1;
             int right = position + 1;
-            // ignore the first row and last row
+
             return ((markers.contains(top - 1) && markers.contains(bottom + 1)) || ((markers.contains(top + 1) && markers.contains(bottom - 1))));
         }
 

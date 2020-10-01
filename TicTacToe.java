@@ -410,9 +410,9 @@ public class TicTacToe{
     }
 
     private static boolean checkHorizontal(int position, ArrayList<Integer> markers){
-        // check for other possible markers beside the current one
+        // ignore markers in first column and last column
         if((position % dimension) > 1){
-            // ignore first column and last column
+            // check if markers exist on the left and right of the current marker
             return (markers.contains(position - 1) && markers.contains(position + 1));
         }
 
@@ -420,9 +420,9 @@ public class TicTacToe{
     }
 
     private static boolean checkVertical(int position, ArrayList<Integer> markers){
-        // check for other possible markers beside the current one
+        // ignore markers in first row and last row
         if(position > dimension && (position + dimension) <= (dimension * dimension)){
-            // ignore the first row and last row
+            // check if markers exist on the top and bottom of the current marker
             return (markers.contains(position - dimension) && markers.contains(position + dimension));
         }
         
@@ -430,13 +430,14 @@ public class TicTacToe{
     }
 
     private static boolean checkDiagonally(int position, ArrayList<Integer> markers){
-        // check for other possible markers beside the current one
+        // ignore markers in first row + column and last row + column
         if((position % dimension) > 1 && position > dimension && (position + dimension) < (dimension * dimension)) {
             int top = position - dimension;
             int bottom = position + dimension;
             int left = position - 1;
             int right = position + 1;
 
+            // check if markers exist on the top-left/bottom-right and top-right/bottom-left of the current marker
             return ((markers.contains(top - 1) && markers.contains(bottom + 1)) || ((markers.contains(top + 1) && markers.contains(bottom - 1))));
         }
 

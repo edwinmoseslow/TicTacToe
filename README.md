@@ -151,7 +151,7 @@ Assuming the current position is `5`, find all markers around :
     -----------
     [7]|[8]|[9]
 
-    The same can be apply to :
+    The same can be applied to :
     top position    - [2], find horizontal combination
     bottom position - [8], find horizontal combination
     left position   - [4], find vertical combination
@@ -159,9 +159,15 @@ Assuming the current position is `5`, find all markers around :
 
 ## Cons about this solution :
 ---
-Though this solution may seems like it does a good job but the complexity increases according to N. When N increases the board increases which also tells us that there will be more centralized positions that will occur on the board. With that this solution would have to iterate through all of the centralized position as it goes.
+One of the main con is that the complexity increases according to N. Hence when N is increased the board increases in size which also tells us that there will be more centralized positions to check for. With that this solution would have to iterate through all of the centralized positions as it goes.
 
-To reduce load, instead of iterating through all the position. I created an ArrayList to track only those positions that the user have entered/marked and with that all I needed to iterate through are the marked positions and its surrounding.
+## Reducing the number of check needed :
+---
+To reduce load, instead of iterating through all the centralized positions. I created an ArrayList to track only those positions that the user have entered/marked. Now all that is left to do is to iterate through the marked centralized positions.
+
+## Things I learnt :
+---
+Initally while doing a 3x3 board, I actually thought of just checking through the each of the blocks against the combinations in order to find a winner. It was only when I thought about the NxN board which led me to consider of making my codes much more dynamic to cater to NxN board. While also considering the amount of possible block to iterate. It is definitely not efficient to search throught the whole board. Hence I thought of searching through the block with the highest possibility of finding a match and only the blocks that the user have selected.
 
 ## Things I noticed :
 ---

@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.*;
-import java.lang.*;
 
 public class TicTacToe{
     
@@ -116,7 +115,7 @@ public class TicTacToe{
         // breakline
         System.out.println();
 
-        for(Map.Entry m : board.entrySet()) {
+        for(Map.Entry<Integer, String> m : board.entrySet()) {
             printValue(String.valueOf(m.getValue()));
             
             if(count%dimension == 0 && count != board.size()) {
@@ -434,8 +433,6 @@ public class TicTacToe{
         if((position % dimension) > 1 && position > dimension && (position + dimension) < (dimension * dimension)) {
             int top = position - dimension;
             int bottom = position + dimension;
-            int left = position - 1;
-            int right = position + 1;
 
             // check if markers exist on the top-left/bottom-right and top-right/bottom-left of the current marker
             return ((markers.contains(top - 1) && markers.contains(bottom + 1)) || ((markers.contains(top + 1) && markers.contains(bottom - 1))));

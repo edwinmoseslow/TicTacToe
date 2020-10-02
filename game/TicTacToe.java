@@ -426,7 +426,10 @@ public class TicTacToe{
             int bottom = position + dimension;
 
             // check if markers exist on the top-left/bottom-right and top-right/bottom-left of the current marker
-            return ((markers.contains(top - 1) && markers.contains(bottom + 1)) || ((markers.contains(top + 1) && markers.contains(bottom - 1))));
+            return ((markers.contains(top - 1) 
+                && markers.contains(bottom + 1)) 
+                || ((markers.contains(top + 1) 
+                && markers.contains(bottom - 1))));
         }
 
         return false;

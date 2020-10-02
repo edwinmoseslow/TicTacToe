@@ -27,6 +27,10 @@ Then run the game by typing :
 
     java game/TicTacToe
 
+    or
+
+    java game.TicTacToe
+
 ---
 <br>
 

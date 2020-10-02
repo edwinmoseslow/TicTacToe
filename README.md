@@ -87,6 +87,8 @@ Assuming the current position is `5`, find all markers around :
     -----------
      7 | 8 | 9
 
+    Assuming position = 5
+
     Condition to prevent selecting position at the extreme left :
     (position % n) != 1
 
@@ -96,8 +98,8 @@ Assuming the current position is `5`, find all markers around :
     Condition to prevent selecting positions at both extreme left & right : 
     (position % n) > 1
 
-    left of 5 : 4 = 5 - 1
-    right of 5 : 3 = 5 + 1
+    left of 5 : 4 = position - 1
+    right of 5 : 3 = position + 1
 
 
 ### Find Vertical Match : [2, 5, 8]
@@ -108,6 +110,8 @@ Assuming the current position is `5`, find all markers around :
     -----------
      7 |[8]| 9
 
+    Assuming position = 5
+
     Condition to prevent selecting position at extreme top : 
     position > n
     
@@ -116,8 +120,9 @@ Assuming the current position is `5`, find all markers around :
 
     Condition to prevent selecting positions at both extreme top & bottom :
     position > n && (position + n) <= (n * n)
-    top of 5 is 2 = 5(position) - n
-    bottom of 5 is 8 = 5(position) + n
+    
+    top of 5 is 2 = position - n
+    bottom of 5 is 8 = position + n
 
 ### Find Diagonally Match : [1, 5, 9], [3, 5, 7]
 

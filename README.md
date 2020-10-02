@@ -15,23 +15,6 @@ Just like any other Tic Tac Toe game, players are required to get a 3 matching c
 
 As a user all you need to do is to read the instructions given to you via the terminal and follow through by entering the specific options.
 
----
-<br>
-
-## How to run the game :
-First, compile the game by typing :
-    
-    javac game/*.java
-
-Then run the game by typing either of the two command below : 
-    
-    java game/TicTacToe
-
-    or
-
-    java game.TicTacToe
-
----
 <br>
 
 ## Documentation :
@@ -50,6 +33,26 @@ Clone via github CLI :
 
 
 Or you can download the project as a ZIP file. 
+
+### How to run the game :
+---
+Open your terminal and cd into this project directory which will look like this, once you are in :
+
+    XXXXXXX/Desktop/tic-tac-toe$
+
+Next, compile the game by typing :
+    
+    javac game/*.java
+
+Then run the game by typing either of the two command below : 
+    
+    java game/TicTacToe
+
+    or
+
+    java game.TicTacToe
+
+---
 
 ### Logic behind finding if a match/combination has been found :
 ---

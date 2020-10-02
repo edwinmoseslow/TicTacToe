@@ -4,16 +4,16 @@ import java.util.*;
 
 public class BoardChecker {
     public static boolean checkCombination(ArrayList<Integer> markers, int dimension){
-        for(int i : markers){
-            if(checkHorizontal(i, markers, dimension) 
-                || checkDiagonally(i, markers, dimension) 
-                || checkVertical(i, markers, dimension)){
+        // iterate through current player marked positions
+        for(int position : markers){
+            if(checkHorizontal(position, markers, dimension) 
+                || checkDiagonally(position, markers, dimension) 
+                || checkVertical(position, markers, dimension)){
                 return true;
             }
         }
         return false;
     }
-    
 
     private static boolean checkHorizontal(int position, ArrayList<Integer> markers, int dimension){
         // ignore markers in first column and last column

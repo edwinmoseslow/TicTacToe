@@ -2,7 +2,7 @@ package game;
 
 public class Output {
 
-    public static void printMenuOption() {
+    public static void selectGameMode() {
         System.out.println();
         System.out.println(Constant.DIVIDER);
         System.out.println("Enter '1' for Basic Mode(Board Size : 3x3)");
@@ -11,7 +11,7 @@ public class Output {
         System.out.println(Constant.DIVIDER);
     }
 
-    public static void printTitle(int gameState) {
+    public static void gameBanner(int gameState) {
         switch(gameState){
             case Constant.GAME_DEFAULT:
                 System.out.println(Constant.DIVIDER);
@@ -37,7 +37,7 @@ public class Output {
         }
     }
 
-    public static void printAskName(int turn){
+    public static void inputName(int turn){
         switch(turn){
             case Constant.PLAYER_ONE:
                 System.out.println("Enter name for Player 1 :");

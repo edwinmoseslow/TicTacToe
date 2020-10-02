@@ -51,16 +51,16 @@ public class TicTacToe{
     private static void printInterface() {
         switch (gameState) {
             case Constant.GAME_DEFAULT:
-                Output.printTitle(Constant.GAME_DEFAULT);
+                Output.gameBanner(Constant.GAME_DEFAULT);
                 gameState = Constant.GAME_ETR_NAME;
                 turn = Constant.PLAYER_ONE;
-                Output.printAskName(turn);
+                Output.inputName(turn);
                 break;
             case Constant.GAME_ETR_NAME:
-                Output.printAskName(turn);
+                Output.inputName(turn);
                 break;
             case Constant.GAME_MENU:
-                Output.printMenuOption();
+                Output.selectGameMode();
                 break;
             case Constant.GAME_START:
                 printBoard();
@@ -219,7 +219,7 @@ public class TicTacToe{
 
     private static void gameStart(){
         gameState = Constant.GAME_START;
-        Output.printTitle(Constant.GAME_START);
+        Output.gameBanner(Constant.GAME_START);
 
         determineWhoToStart();
     }
@@ -232,7 +232,7 @@ public class TicTacToe{
     }
 
     private static void gameOver(boolean winnerExist){
-        Output.printTitle(Constant.GAME_END);
+        Output.gameBanner(Constant.GAME_END);
 
         printBoard();
 
@@ -296,7 +296,7 @@ public class TicTacToe{
             gameState = Constant.GAME_END;
             gameOver(winnerExist);
         } else {
-            Output.printTitle(Constant.GAME_IN_PROGRESS);
+            Output.gameBanner(Constant.GAME_IN_PROGRESS);
 
             if(turn != Constant.PLAYER_DEFAULT){
                 turn = (turn == Constant.PLAYER_ONE) ? Constant.PLAYER_TWO : Constant.PLAYER_ONE;

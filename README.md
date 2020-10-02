@@ -53,6 +53,7 @@ Or you can download the project as a ZIP file.
 
 ### Logic behind finding if a match/combination has been found :
 ---
+What you see below is the explaination of the logic that is applied in `BoardChecker.java`.
 
 Finding a match with NxN with certain assumptions in place,
 

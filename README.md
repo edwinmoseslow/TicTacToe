@@ -19,18 +19,30 @@ This is a simple game of tic tac toe.
 <br>
 
 ## How to run the game :
-To run the game type : 
+First, compile the game by typing :
 
-    make run
+    javac game/*.java
 
-or
+Then run the game by typing : 
 
-    java TicTacToe.java
+    java game/TicTacToe
 
 ---
 <br>
 
 ## Documentation :
+
+### To get the project :
+    
+    Clone via termianl with HTTPS
+    $ git clone https://github.com/edwinmoseslow/tic-tac-toe.git
+
+    Clone via github CLI :
+    $ gh repo clone edwinmoseslow/tic-tac-toe
+
+    Download the project as a ZIP file. 
+
+
 Finding a possible match with NxN with certain assumptions in place,
 
     Assuming N = 3,

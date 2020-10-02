@@ -6,8 +6,8 @@
 # define a variable for a parameter. When you run make, you could use:
 # make run FILE="Algo.csv" para sobre escribir el valor de FILE.
 
-JFLAGS = -g
-JC = javac
+JFLAGS= -g
+JC= javac
 JVM= java 
 FILE=
 
@@ -35,18 +35,23 @@ FILE=
 #
 
 .java.class: 
-	$(JC) $(JFLAGS) $*.java
+	$(JC) $*.java
 #
 # CLASSES is a macro consisting of 4 words (one for each java source file)
 #
 
 CLASSES = \
 	TicTacToe.java \
+	Constant.java \
+	# TestRunnner.java \
 
 #
 # MAIN is a variable with the name of the file containing the main method
 #
 MAIN = TicTacToe
+# TEST = TestRunner
+
+PATH = game/
 
 #
 # the default make target entry
@@ -62,18 +67,24 @@ default: classes
 # with the .class suffix
 #
 
-classes: $(CLASSES:.java=.java)
+classes: $(CLASSES:.java=.class)
 
 #
 # RM is a predefined macro in make (RM = rm -f)
 #
 
 clean: 
-	$(RM) *.java
+	rm -f game/*.class
 
 # Next two lines contain a target for running the program
 # Remember the tab in the second line.
 # $(JMV) $(MAIN) are replaced by their values
 
 run: 
-	$(JVM) $(MAIN).java
+	$(JVM) $(PATH)$(MAIN).java
+
+# test: 
+# 	$(JVM) $(PATH)$(TEST).java
+
+hi:
+echo hi
